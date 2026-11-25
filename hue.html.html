@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quần Thể Di Tích Cố Đô Huế | Complex of Hue Monuments</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond, Playfair Display & Be Vietnam Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Be Vietnam Pro"', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        imperial: {
+                            DEFAULT: '#7C1D1D',
+                            dark: '#541010',
+                            light: '#9E2A2A'
+                        },
+                        gold: {
+                            DEFAULT: '#C8962E',
+                            light: '#E7C36B',
+                            dark: '#966C14'
+                        },
+                        jade: {
+                            DEFAULT: '#1D5B53',
+                            dark: '#123D37',
+                            light: '#2A7A70'
+                        },
+                        parchment: {
+                            DEFAULT: '#FBF8F1',
+                            dark: '#F2EBE0'
+                        },
+                        ink: {
+                            DEFAULT: '#2B2623',
+                            muted: '#574F49'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Royal Hue Subtle Lattice Pattern */
+        .royal-pattern {
+            background-color: #FBF8F1;
+            background-image: radial-gradient(#C8962E 0.7px, transparent 0.7px), radial-gradient(#1D5B53 0.7px, #FBF8F1 0.7px);
+            background-size: 36px 36px;
+            background-position: 0 0, 18px 18px;
+            background-attachment: fixed;
+        }
+        .panorama-viewport {
+            cursor: grab;
+            user-select: none;
+            touch-action: pan-y;
+        }
+        .panorama-viewport:active {
+            cursor: grabbing;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.85); opacity: 0.9; }
+            100% { transform: scale(2.15); opacity: 0; }
+        }
+        .hotspot-pulse::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 9999px;
+            border: 2px solid #C8962E;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F2EBE0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #966C14;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-parchment text-ink font-sans antialiased selection:bg-imperial selection:text-white">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+
+    <!-- 1. STICKY HEADER & BILINGUAL SWITCHER -->
+    <header class="sticky top-0 z-40 bg-parchment/95 backdrop-blur-md border-b border-gold/35 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Emblem -->
+                <a href="#hero" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-xl bg-imperial flex items-center justify-center text-gold-light shadow-md border border-gold/60 group-hover:scale-105 transition-transform">
+                        <!-- Stylized Ngo Mon / Royal Gate SVG -->
+                        <svg class="w-7 h-7" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 14L18 7L31 14H5Z" fill="#E7C36B"/>
+                            <rect x="8" y="15" width="20" height="5" rx="1" fill="#FBF8F1"/>
+                            <rect x="4" y="21" width="28" height="9" rx="1.5" fill="#E7C36B"/>
+                            <path d="M15 30V24C15 22.8954 15.8954 22 17 22H19C20.1046 22 21 22.8954 21 24V30H15Z" fill="#7C1D1D"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span id="nav-brand-title" class="block font-serif font-bold text-lg sm:text-xl text-imperial leading-tight">
+                            Quần Thể Di Tích Cố Đô Huế
+                        </span>
+                        <span id="nav-brand-sub" class="block text-xs text-jade font-semibold tracking-wider uppercase">
+                            Di sản Văn hóa Thế giới UNESCO • 1993
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-ink">
+                    <a href="#hero" data-i18n="nav_overview" class="hover:text-imperial transition-colors py-1 border-b-2 border-transparent hover:border-imperial">Tổng quan</a>
+                    <a href="#virtual-explorer" data-i18n="nav_explorer" class="hover:text-imperial transition-colors py-1 border-b-2 border-transparent hover:border-imperial">Bản đồ & Không gian 360°</a>
+                    <a href="#royal-culture" data-i18n="nav_culture" class="hover:text-imperial transition-colors py-1 border-b-2 border-transparent hover:border-imperial">Nhã nhạc & Văn hóa</a>
+                    <a href="#itinerary-planner" data-i18n="nav_planner" class="hover:text-imperial transition-colors py-1 border-b-2 border-transparent hover:border-imperial">Lịch trình & Quy định</a>
+                    <a href="#guestbook" data-i18n="nav_guestbook" class="hover:text-imperial transition-colors py-1 border-b-2 border-transparent hover:border-imperial">Sổ lưu bút</a>
+                </nav>
+
+                <!-- Language Switcher [VI | EN] & Mobile Menu Toggle -->
+                <div class="flex items-center gap-3">
+                    <div class="bg-parchment-dark p-1 rounded-full border border-gold/45 flex items-center shadow-inner" role="group" aria-label="Language Switcher">
+                        <button id="btn-lang-vi" onclick="setLanguage('vi')" class="px-3.5 py-1.5 rounded-full text-xs font-bold transition-all bg-imperial text-white shadow-sm">
+                            VI
+                        </button>
+                        <button id="btn-lang-en" onclick="setLanguage('en')" class="px-3.5 py-1.5 rounded-full text-xs font-bold transition-all text-ink-muted hover:text-imperial">
+                            EN
+                        </button>
+                    </div>
+
+                    <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-parchment-dark text-ink hover:bg-gold/20 transition-colors" aria-label="Toggle Menu">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-parchment border-t border-gold/25 px-4 pt-3 pb-5 space-y-2 shadow-lg">
+            <a href="#hero" onclick="closeMobileMenu()" data-i18n="nav_overview" class="block px-4 py-2.5 rounded-xl font-medium hover:bg-parchment-dark">Tổng quan</a>
+            <a href="#virtual-explorer" onclick="closeMobileMenu()" data-i18n="nav_explorer" class="block px-4 py-2.5 rounded-xl font-medium hover:bg-parchment-dark">Bản đồ & Không gian 360°</a>
+            <a href="#royal-culture" onclick="closeMobileMenu()" data-i18n="nav_culture" class="block px-4 py-2.5 rounded-xl font-medium hover:bg-parchment-dark">Nhã nhạc & Văn hóa</a>
+            <a href="#itinerary-planner" onclick="closeMobileMenu()" data-i18n="nav_planner" class="block px-4 py-2.5 rounded-xl font-medium hover:bg-parchment-dark">Lịch trình & Quy định</a>
+            <a href="#guestbook" onclick="closeMobileMenu()" data-i18n="nav_guestbook" class="block px-4 py-2.5 rounded-xl font-medium hover:bg-parchment-dark">Sổ lưu bút</a>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION (IMPERIAL HUE AESTHETIC) -->
+    <section id="hero" class="relative overflow-hidden bg-gradient-to-br from-imperial-dark via-imperial to-jade-dark text-parchment">
+        <!-- Subtle Golden Glow -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at 70% 30%, #E7C36B 0%, transparent 60%);"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                
+                <!-- Left Column: UNESCO Heritage Intro -->
+                <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-jade/80 border border-gold/50 text-gold-light text-xs sm:text-sm font-semibold tracking-wide">
+                        <i class="fa-solid fa-crown"></i>
+                        <span data-i18n="hero_badge">DI SẢN VĂN HÓA THẾ GIỚI UNESCO (1993)</span>
+                    </div>
+
+                    <h1 data-i18n="hero_title" class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                        Quần Thể Di Tích <span class="text-gold-light block sm:inline">Cố Đô Huế</span>
+                    </h1>
+
+                    <p data-i18n="hero_subtitle" class="text-base sm:text-lg text-parchment/90 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Kinh đô của Việt Nam dưới triều đại nhà Nguyễn (1802 – 1945) bên dòng sông Hương thơ mộng — nơi hội tụ đỉnh cao nghệ thuật kiến trúc cung đình phương Đông, hệ thống lăng tẩm uy nghi và di sản Nhã nhạc cung đình bất hủ.
+                    </p>
+
+                    <!-- Poetic Quote / Royal Inscription -->
+                    <blockquote class="p-5 rounded-2xl bg-black/25 border-l-4 border-gold text-left backdrop-blur-sm">
+                        <p data-i18n="hero_quote" class="font-serif italic text-base sm:text-lg text-gold-light mb-1.5">
+                            “Dòng Hương giang uốn lượn ôm lấy Kinh thành, núi Ngự Bình làm tiền án, tạo nên thế phong thủy sơn thủy hữu tình bậc nhất đất Việt.”
+                        </p>
+                        <footer data-i18n="hero_quote_author" class="text-xs sm:text-sm text-parchment/80 font-medium">
+                            — Kinh đô Phú Xuân • Thừa Thiên Huế
+                        </footer>
+                    </blockquote>
+
+                    <!-- Hero CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#virtual-explorer" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-gold hover:bg-gold-light text-ink font-bold text-sm sm:text-base shadow-lg shadow-black/30 transition-all flex items-center justify-center gap-2.5 group">
+                            <i class="fa-solid fa-compass text-lg group-hover:rotate-45 transition-transform"></i>
+                            <span data-i18n="hero_cta_primary">Khám phá Cố đô 360°</span>
+                        </a>
+                        <a href="#royal-culture" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white border border-white/25 font-semibold text-sm sm:text-base transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-music"></i>
+                            <span data-i18n="hero_cta_secondary">Trải nghiệm Nhã nhạc Huế</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Real Photography Hero Showcase with Fallback -->
+                <div class="lg:col-span-6">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-gold/45 bg-gradient-to-b from-[#2b192e] via-[#5c2c35] to-[#123D37] p-3 sm:p-4">
+                        <div class="relative rounded-2xl overflow-hidden aspect-[16/10] bg-ink group">
+                            <img
+                                id="hero-real-photo"
+                                src="https://commons.wikimedia.org/wiki/Special:FilePath/C%E1%BB%95ng_Ng%E1%BB%8D_M%C3%B4n_Hu%E1%BA%BF.jpg?width=1280"
+                                data-fallback-src="https://commons.wikimedia.org/wiki/Special:FilePath/Thai_Hoa_palace.jpg?width=1280"
+                                alt="Ngọ Môn - Đại Nội Huế"
+                                onerror="handleImageFallback(this, 'citadel')"
+                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                            >
+                            <!-- Subtle Gradient Vignette & Photo Badge -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 pointer-events-none"></div>
+                            <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/55 backdrop-blur-md text-gold-light text-[11px] font-semibold border border-gold/35 flex items-center gap-1.5">
+                                <i class="fa-solid fa-camera"></i>
+                                <span data-i18n="hero_photo_tag">Ảnh thực tế • Hoàng Thành Huế</span>
+                            </div>
+                            <div class="absolute bottom-3 left-4 right-4 flex items-end justify-between text-white pointer-events-none">
+                                <div>
+                                    <p data-i18n="hero_photo_headline" class="font-serif font-bold text-base sm:text-lg leading-snug">Ngọ Môn – Lầu Ngũ Phụng</p>
+                                    <p data-i18n="hero_photo_sub" class="text-xs text-parchment/80">Cổng chính phía Nam Hoàng Thành Huế (Xây dựng năm 1833)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 flex items-center justify-between text-xs text-parchment/85 px-1">
+                            <span data-i18n="hero_img_caption">Di sản Văn hóa Thế giới • Quần thể Di tích Cố đô Huế</span>
+                            <span class="text-gold-light font-semibold">16.4698° N, 107.5784° E</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. INTERACTIVE PERFUME RIVER MAP & 360° HERITAGE EXPLORER -->
+    <section id="virtual-explorer" class="py-16 sm:py-24 royal-pattern border-b border-gold/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <span data-i18n="exp_tag" class="inline-block px-3.5 py-1 rounded-full bg-imperial/10 text-imperial font-bold text-xs uppercase tracking-wider">
+                    BẢN ĐỒ DI SẢN & KHÔNG GIAN SỐ
+                </span>
+                <h2 data-i18n="exp_title" class="font-serif text-3xl sm:text-4xl font-bold text-ink">
+                    Khám Phá 6 Di Sản Tiêu Biểu Dọc Sông Hương
+                </h2>
+                <p data-i18n="exp_desc" class="text-ink-muted text-sm sm:text-base">
+                    Chọn từng điểm di tích trên bản đồ sông Hương để xoay góc nhìn toàn cảnh 360°, chuyển đổi ánh sáng bình minh / hoàng hôn và nghe thuyết minh di sản bằng giọng nói.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left (5 cols): Perfume River & Hue Monuments Interactive Map -->
+                <div class="lg:col-span-5 bg-white rounded-3xl p-5 sm:p-6 shadow-xl border border-gold/35">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 data-i18n="map_heading" class="font-serif font-bold text-lg text-ink flex items-center gap-2">
+                            <i class="fa-solid fa-map-location-dot text-imperial"></i>
+                            <span>Bản đồ Quần thể Di tích Huế</span>
+                        </h3>
+                        <span data-i18n="map_hint" class="text-xs bg-parchment-dark text-jade px-2.5 py-1 rounded-full font-semibold">
+                            6 điểm di sản
+                        </span>
+                    </div>
+
+                    <!-- Interactive SVG Map of Perfume River (Sông Hương) -->
+                    <div class="relative rounded-2xl overflow-hidden bg-[#EEF5EE] border border-jade/20 aspect-[4/3]">
+                        <svg viewBox="0 0 400 320" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Hills & Mountains Left (Upstream) -->
+                            <circle cx="45" cy="195" r="55" fill="#BBF7D0" opacity="0.65"/>
+                            <circle cx="70" cy="275" r="65" fill="#86EFAC" opacity="0.5"/>
+                            <circle cx="170" cy="285" r="55" fill="#BBF7D0" opacity="0.6"/>
+
+                            <!-- Winding Perfume River (Sông Hương) -->
+                            <path d="M 35 320 C 55 245, 95 215, 165 185 C 235 155, 290 120, 395 65" fill="none" stroke="#5EEAD4" stroke-width="26" stroke-linecap="round" opacity="0.6"/>
+                            <path d="M 35 320 C 55 245, 95 215, 165 185 C 235 155, 290 120, 395 65" fill="none" stroke="#0D9488" stroke-width="14" stroke-linecap="round" opacity="0.8"/>
+
+                            <!-- Hue Imperial Citadel Square (North Bank) -->
+                            <rect x="195" y="45" width="76" height="68" rx="6" fill="#FEE2E2" stroke="#7C1D1D" stroke-width="2"/>
+                            <rect x="213" y="62" width="40" height="35" rx="3" fill="#7C1D1D" opacity="0.85"/>
+
+                            <!-- Truong Tien Bridge across River -->
+                            <line x1="286" y1="102" x2="306" y2="132" stroke="#B45309" stroke-width="5"/>
+
+                            <!-- Compass Rose -->
+                            <g transform="translate(355, 275)" opacity="0.7">
+                                <circle cx="0" cy="0" r="18" fill="none" stroke="#1D5B53" stroke-width="1.2"/>
+                                <polygon points="0,-14 3,0 0,14 -3,0" fill="#7C1D1D"/>
+                                <text x="0" y="-21" text-anchor="middle" font-size="8" font-weight="bold" fill="#1D5B53">N</text>
+                            </g>
+                        </svg>
+
+                        <!-- 6 Interactive Hotspot Pins -->
+                        <!-- 1. Imperial City (Đại Nội) -->
+                        <button onclick="selectMonument('citadel')" id="pin-citadel" style="top: 25%; left: 58%;" class="hotspot-btn hotspot-pulse absolute -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-gold text-ink font-bold text-xs flex items-center justify-center shadow-lg border-2 border-white transition-transform hover:scale-110 z-20" title="Đại Nội Huế">
+                            1
+                        </button>
+                        <!-- 2. Thien Mu Pagoda -->
+                        <button onclick="selectMonument('thienmu')" id="pin-thienmu" style="top: 47%; left: 32%;" class="hotspot-btn absolute -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-imperial text-white font-bold text-xs flex items-center justify-center shadow-lg border-2 border-white transition-transform hover:scale-110 z-10" title="Chùa Thiên Mụ">
+                            2
+                        </button>
+                        <!-- 3. Perfume River & Truong Tien Bridge -->
+                        <button onclick="selectMonument('river')" id="pin-river" style="top: 38%; left: 74%;" class="hotspot-btn absolute -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-imperial text-white font-bold text-xs flex items-center justify-center shadow-lg border-2 border-white transition-transform hover:scale-110 z-10" title="Sông Hương & Cầu Trường Tiền">
+                            3
+                        </button>
+                        <!-- 4. Tu Duc Tomb -->
+                        <button onclick="selectMonument('tuduc')" id="pin-tuduc" style="top: 66%; left: 22%;" class="hotspot-btn absolute -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-imperial text-white font-bold text-xs flex items-center justify-center shadow-lg border-2 border-white transition-transform hover:scale-110 z-10" title="Lăng Tự Đức">
+                            4
+                        </button>
+                        <!-- 5. Khai Dinh Tomb -->
+                        <button onclick="selectMonument('khaidinh')" id="pin-khaidinh" style="top: 84%; left: 48%;" class="hotspot-btn absolute -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-imperial text-white font-bold text-xs flex items-center justify-center shadow-lg border-2 border-white transition-transform hover:scale-110 z-10" title="Lăng Khải Định">
+                            5
+                        </button>
+                        <!-- 6. Minh Mang Tomb -->
+                        <button onclick="selectMonument('minhmang')" id="pin-minhmang" style="top: 88%; left: 16%;" class="hotspot-btn absolute -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-imperial text-white font-bold text-xs flex items-center justify-center shadow-lg border-2 border-white transition-transform hover:scale-110 z-10" title="Lăng Minh Mạng">
+                            6
+                        </button>
+                    </div>
+
+                    <!-- Monument Selector Buttons -->
+                    <div id="monument-list" class="mt-4 space-y-2">
+                        <!-- Rendered dynamically -->
+                    </div>
+                </div>
+
+                <!-- Right (7 cols): Virtual 360° Heritage Explorer & Audio Guide -->
+                <div class="lg:col-span-7 bg-white rounded-3xl overflow-hidden shadow-xl border border-gold/35 flex flex-col">
+                    <!-- Interactive 360° Real-Photo Panoramic Viewport -->
+                    <div id="panorama-container" class="panorama-viewport relative h-72 sm:h-96 bg-ink overflow-hidden">
+                        <div id="panorama-canvas" class="w-[185%] h-full transition-transform duration-75 ease-out relative" style="transform: translateX(-22%);">
+                            <!-- Dynamic Real Photo + Lighting Filter Injected Here -->
+                        </div>
+
+                        <!-- Top Controls: 360° Indicator, Zoom & Dawn/Sunset Lighting Toggle -->
+                        <div class="absolute top-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2 z-10">
+                            <div class="flex items-center gap-2">
+                                <span class="px-3.5 py-1.5 rounded-full bg-black/65 backdrop-blur-md text-white text-xs font-semibold flex items-center gap-2 border border-white/20">
+                                    <i class="fa-solid fa-compass text-gold-light animate-spin" style="animation-duration: 14s;"></i>
+                                    <span data-i18n="pano_badge">Toàn cảnh 360° ảnh thực</span>
+                                </span>
+                                <!-- Zoom Controls -->
+                                <div class="hidden sm:flex items-center bg-black/65 backdrop-blur-md rounded-full border border-white/20 p-0.5">
+                                    <button onclick="adjustPanoZoom(-0.15)" class="w-7 h-7 rounded-full text-white hover:bg-white/20 text-xs flex items-center justify-center" title="Thu nhỏ / Zoom Out">
+                                        <i class="fa-solid fa-magnifying-glass-minus"></i>
+                                    </button>
+                                    <span id="pano-zoom-label" class="px-2 text-[11px] font-mono text-gold-light">1.0x</span>
+                                    <button onclick="adjustPanoZoom(0.15)" class="w-7 h-7 rounded-full text-white hover:bg-white/20 text-xs flex items-center justify-center" title="Phóng to / Zoom In">
+                                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Dawn / Sunset Atmosphere Switcher -->
+                            <div class="flex items-center gap-1 bg-black/65 backdrop-blur-md p-1 rounded-full border border-white/20">
+                                <button onclick="setLightingMode('dawn')" id="btn-light-dawn" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-gold text-ink flex items-center gap-1.5">
+                                    <i class="fa-solid fa-sun"></i>
+                                    <span data-i18n="light_dawn">Bình minh</span>
+                                </button>
+                                <button onclick="setLightingMode('sunset')" id="btn-light-sunset" class="px-3 py-1 rounded-full text-xs font-bold transition-all text-white/85 hover:text-white flex items-center gap-1.5">
+                                    <i class="fa-solid fa-cloud-sun"></i>
+                                    <span data-i18n="light_sunset">Hoàng hôn</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Pan Controls -->
+                        <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between z-10">
+                            <button onclick="panPanorama(-45)" class="w-10 h-10 rounded-full bg-black/65 hover:bg-imperial text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-colors" aria-label="Pan Left">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <span data-i18n="pano_drag_hint" class="px-4 py-1.5 rounded-full bg-black/65 backdrop-blur-md text-white/95 text-xs font-medium pointer-events-none">
+                                <i class="fa-solid fa-arrows-left-right mr-1.5 text-gold-light"></i>Kéo ngang hoặc bấm mũi tên để xoay góc nhìn
+                            </span>
+                            <button onclick="panPanorama(45)" class="w-10 h-10 rounded-full bg-black/65 hover:bg-imperial text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-colors" aria-label="Pan Right">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Real Photo Gallery Strip (Switch angles for active monument) -->
+                    <div class="bg-parchment-dark/70 px-6 py-3 border-b border-gold/25 flex items-center justify-between gap-3">
+                        <span data-i18n="gallery_angle_label" class="text-xs font-bold uppercase tracking-wider text-ink-muted shrink-0">
+                            <i class="fa-regular fa-images text-imperial mr-1"></i>Góc chụp thực tế:
+                        </span>
+                        <div id="photo-angle-strip" class="flex items-center gap-2 overflow-x-auto py-0.5">
+                            <!-- Populated dynamically with real photo thumbnails -->
+                        </div>
+                    </div>
+
+                    <!-- Monument Info & Web Speech Audio Guide -->
+                    <div class="p-6 sm:p-8 space-y-5 flex-1">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-parchment-dark pb-4">
+                            <div>
+                                <span id="monument-category" class="text-xs font-bold uppercase tracking-wider text-jade block mb-1">
+                                    Di tích #1 • Trung tâm Hoàng Thành
+                                </span>
+                                <h3 id="monument-title" class="font-serif text-2xl sm:text-3xl font-bold text-ink">
+                                    Đại Nội Huế (Ngọ Môn & Điện Thái Hòa)
+                                </h3>
+                            </div>
+
+                            <!-- Audio Narration Button -->
+                            <button id="btn-audio-guide" onclick="toggleAudioNarration()" class="px-5 py-3 rounded-2xl bg-imperial hover:bg-imperial-dark text-white font-semibold text-sm shadow-md transition-all flex items-center justify-center gap-2.5 shrink-0">
+                                <i id="audio-icon" class="fa-solid fa-volume-high"></i>
+                                <span id="audio-btn-text">Nghe thuyết minh</span>
+                            </button>
+                        </div>
+
+                        <p id="monument-description" class="text-ink-muted leading-relaxed text-sm sm:text-base">
+                            Đại Nội Huế bao gồm Hoàng Thành và Tử Cấm Thành, được xây dựng từ năm 1804 dưới triều vua Gia Long. Ngọ Môn uy nghi là cổng chính phía Nam, nơi diễn ra các đại lễ trọng đại của triều Nguyễn, dẫn thẳng vào Điện Thái Hòa — biểu tượng quyền lực tối cao của hoàng triều.
+                        </p>
+
+                        <!-- Architectural Highlights -->
+                        <div id="monument-highlights" class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. NHA NHAC ROYAL COURT MUSIC & HUE CULTURE -->
+    <section id="royal-culture" class="py-16 sm:py-24 bg-white border-b border-gold/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span data-i18n="cult_tag" class="inline-block px-3.5 py-1 rounded-full bg-jade/10 text-jade font-bold text-xs uppercase tracking-wider">
+                    DI SẢN PHI VẬT THỂ & TINH HOA CUNG ĐÌNH
+                </span>
+                <h2 data-i18n="cult_title" class="font-serif text-3xl sm:text-4xl font-bold text-ink">
+                    Nhã Nhạc Cung Đình Huế & Văn Hóa Cố Đô
+                </h2>
+                <p data-i18n="cult_desc" class="text-ink-muted text-sm sm:text-base">
+                    Được UNESCO vinh danh là Kiệt tác Truyền khẩu và Di sản Phi vật thể của Nhân loại (2003), Nhã nhạc cung đình Huế kết hợp hài hòa giữa âm nhạc bác học, ẩm thực tinh tế và trang phục Áo dài ngũ thân truyền thống.
+                </p>
+            </div>
+
+            <!-- Interactive Nha Nhac Instrument Synthesizer Studio -->
+            <div class="rounded-3xl bg-gradient-to-br from-imperial-dark via-imperial to-[#3D1515] text-parchment p-6 sm:p-10 shadow-2xl border border-gold/40">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/15 pb-6 mb-8">
+                    <div>
+                        <span data-i18n="nhanhac_badge" class="text-xs font-bold uppercase tracking-wider text-gold-light">TRÌNH MÔ PHỎNG ÂM THANH TƯƠNG TÁC</span>
+                        <h3 data-i18n="nhanhac_heading" class="font-serif text-2xl sm:text-3xl font-bold text-white mt-1">
+                            Nhạc Cụ Tiêu Biểu Trong Dàn Nhã Nhạc
+                        </h3>
+                    </div>
+                    <button onclick="playRoyalEnsemble()" class="px-5 py-3 rounded-2xl bg-gold hover:bg-gold-light text-ink font-bold text-sm shadow-lg transition-all flex items-center justify-center gap-2 shrink-0">
+                        <i class="fa-solid fa-play"></i>
+                        <span data-i18n="nhanhac_play_all">Hòa tấu một khúc ngắn</span>
+                    </button>
+                </div>
+
+                <!-- 3 Interactive Traditional Instruments -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Instrument 1: Dan Ty Ba (Pear-shaped Lute) -->
+                    <div class="rounded-2xl bg-black/25 border border-gold/30 p-6 flex flex-col justify-between space-y-4 hover:border-gold transition-colors">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="w-11 h-11 rounded-xl bg-gold/20 text-gold-light flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-guitar"></i>
+                                </span>
+                                <span class="text-xs font-mono text-gold-light/80">Dây tơ • Pentatonic</span>
+                            </div>
+                            <h4 data-i18n="inst_tyba_title" class="font-serif text-xl font-bold text-white pt-1">Đàn Tỳ Bà (Pipa)</h4>
+                            <p data-i18n="inst_tyba_desc" class="text-xs sm:text-sm text-parchment/85 leading-relaxed">
+                                Nhạc cụ dây gảy 4 dây mang âm sắc trong trẻo, thánh thót, giữ vai trò dẫn dắt giai điệu chủ đạo trong dàn Tiểu nhạc cung đình Huế.
+                            </p>
+                        </div>
+                        <button onclick="playInstrument('tyba')" class="w-full py-3 rounded-xl bg-white/10 hover:bg-gold hover:text-ink text-gold-light font-semibold text-sm border border-gold/40 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-volume-low"></i>
+                            <span data-i18n="inst_try_btn">Gảy thử tiếng đàn</span>
+                        </button>
+                    </div>
+
+                    <!-- Instrument 2: Sao Truc (Bamboo Flute) -->
+                    <div class="rounded-2xl bg-black/25 border border-gold/30 p-6 flex flex-col justify-between space-y-4 hover:border-gold transition-colors">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="w-11 h-11 rounded-xl bg-jade/40 text-emerald-300 flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-wind"></i>
+                                </span>
+                                <span class="text-xs font-mono text-gold-light/80">Bộ hơi • Bamboo</span>
+                            </div>
+                            <h4 data-i18n="inst_sao_title" class="font-serif text-xl font-bold text-white pt-1">Sáo Trúc Cung Đình</h4>
+                            <p data-i18n="inst_sao_desc" class="text-xs sm:text-sm text-parchment/85 leading-relaxed">
+                                Chế tác từ trúc già tuyển chọn, âm thanh ngân vang sâu lắng gợi lên vẻ đẹp trầm mặc của núi Ngự, sông Hương trong các buổi yến tiệc hoàng gia.
+                            </p>
+                        </div>
+                        <button onclick="playInstrument('sao')" class="w-full py-3 rounded-xl bg-white/10 hover:bg-gold hover:text-ink text-gold-light font-semibold text-sm border border-gold/40 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-volume-low"></i>
+                            <span data-i18n="inst_try_sao">Thổi thử âm sáo</span>
+                        </button>
+                    </div>
+
+                    <!-- Instrument 3: Trong Chien (Ceremonial Drum) -->
+                    <div class="rounded-2xl bg-black/25 border border-gold/30 p-6 flex flex-col justify-between space-y-4 hover:border-gold transition-colors">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="w-11 h-11 rounded-xl bg-imperial-light/40 text-amber-300 flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-drum"></i>
+                                </span>
+                                <span class="text-xs font-mono text-gold-light/80">Bộ gõ • Đại nhạc</span>
+                            </div>
+                            <h4 data-i18n="inst_trong_title" class="font-serif text-xl font-bold text-white pt-1">Trống Chiến & Thanh La</h4>
+                            <p data-i18n="inst_trong_desc" class="text-xs sm:text-sm text-parchment/85 leading-relaxed">
+                                Giữ nhịp phách trang nghiêm và tạo khí thế uy nghi trong dàn Đại nhạc khi nhà vua thiết triều tại Điện Thái Hòa hay tế lễ đàn Nam Giao.
+                            </p>
+                        </div>
+                        <button onclick="playInstrument('trong')" class="w-full py-3 rounded-xl bg-white/10 hover:bg-gold hover:text-ink text-gold-light font-semibold text-sm border border-gold/40 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-volume-low"></i>
+                            <span data-i18n="inst_try_trong">Gõ nhịp trống lễ</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Royal Cuisine & Ao Dai Ngu Than Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Royal Cuisine -->
+                <div class="rounded-3xl overflow-hidden bg-parchment border border-gold/35 shadow-md flex flex-col justify-between">
+                    <div class="h-48 overflow-hidden relative bg-ink">
+                        <img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Thai_Hoa_palace.jpg?width=960"
+                            alt="Không gian Cung đình Huế"
+                            onerror="handleImageFallback(this, 'citadel')"
+                            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent"></div>
+                        <span data-i18n="cuisine_tag" class="absolute bottom-3 left-5 px-3 py-1 rounded-full bg-imperial text-white text-[11px] font-bold uppercase tracking-wider">NGHỆ THUẬT ẨM THỰC</span>
+                    </div>
+                    <div class="p-7 sm:p-8 space-y-4 flex-1 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <h3 data-i18n="cuisine_title" class="font-serif text-2xl font-bold text-ink">Ẩm Thực Cung Đình & Dân Gian Huế</h3>
+                            <p data-i18n="cuisine_desc" class="text-sm sm:text-base text-ink-muted leading-relaxed">
+                                Ẩm thực Huế là sự giao thoa tinh xảo giữa ngự thiện cung đình cầu kỳ (Nem công chả phụng, Yến sào, Trà sen Tịnh Tâm) và hương vị dân gian đậm đà như Bún bò Huế, Cơm hến, Bánh bèo – nậm – lọc.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-3 py-1 rounded-full bg-white border border-gold/30 text-xs font-semibold text-ink">Trà Sen Tịnh Tâm</span>
+                            <span class="px-3 py-1 rounded-full bg-white border border-gold/30 text-xs font-semibold text-ink">Bún Bò Huế</span>
+                            <span class="px-3 py-1 rounded-full bg-white border border-gold/30 text-xs font-semibold text-ink">Bánh Ngũ Sắc</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ao Dai Ngu Than -->
+                <div class="rounded-3xl overflow-hidden bg-parchment border border-gold/35 shadow-md flex flex-col justify-between">
+                    <div class="h-48 overflow-hidden relative bg-ink">
+                        <img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Hue_Thien_Mu-Pagoda.JPG?width=960"
+                            alt="Vẻ đẹp cổ kính xứ Huế"
+                            onerror="handleImageFallback(this, 'thienmu')"
+                            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent"></div>
+                        <span data-i18n="aodai_tag" class="absolute bottom-3 left-5 px-3 py-1 rounded-full bg-jade text-white text-[11px] font-bold uppercase tracking-wider">TRANG PHỤC TRUYỀN THỐNG</span>
+                    </div>
+                    <div class="p-7 sm:p-8 space-y-4 flex-1 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <h3 data-i18n="aodai_title" class="font-serif text-2xl font-bold text-ink">Áo Dài Ngũ Thân & Nón Bài Thơ</h3>
+                            <p data-i18n="aodai_desc" class="text-sm sm:text-base text-ink-muted leading-relaxed">
+                                Khởi nguồn từ cuộc cải cách trang phục thời Chúa Nguyễn Phúc Khoát thế kỷ XVIII, Áo dài ngũ thân tượng trưng cho ngũ luân và đạo lý làm người, kết hợp cùng Nón bài thơ tạo nên nét duyên dáng thanh tao đặc trưng của xứ Huế.
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-3 py-1 rounded-full bg-white border border-gold/30 text-xs font-semibold text-ink">Áo Tấc Lễ Phục</span>
+                            <span class="px-3 py-1 rounded-full bg-white border border-gold/30 text-xs font-semibold text-ink">Nón Bài Thơ</span>
+                            <span class="px-3 py-1 rounded-full bg-white border border-gold/30 text-xs font-semibold text-ink">Cổ Phục Triều Nguyễn</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. INTERACTIVE ITINERARY PLANNER & DRESS-CODE SIMULATOR -->
+    <section id="itinerary-planner" class="py-16 sm:py-24 royal-pattern border-b border-gold/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <span data-i18n="plan_tag" class="inline-block px-3.5 py-1 rounded-full bg-imperial/10 text-imperial font-bold text-xs uppercase tracking-wider">
+                    CẨM NANG THAM QUAN CỐ ĐÔ
+                </span>
+                <h2 data-i18n="plan_title" class="font-serif text-3xl sm:text-4xl font-bold text-ink">
+                    Lập Lịch Trình & Kiểm Tra Trang Phục Tham Quan
+                </h2>
+                <p data-i18n="plan_desc" class="text-ink-muted text-sm sm:text-base">
+                    Chọn thời gian lưu trú, chủ đề yêu thích và trang phục dự kiến để hệ thống gợi ý hành trình tham quan Đại Nội – Lăng tẩm tối ưu nhất.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-gold/35 space-y-8">
+                <!-- Controls Row -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- 1. Duration -->
+                    <div class="space-y-2">
+                        <label data-i18n="plan_lbl_days" class="block text-xs font-bold uppercase tracking-wider text-ink-muted">1. Thời lượng chuyến đi</label>
+                        <select id="plan-duration" onchange="generateItinerary()" class="w-full p-3.5 rounded-2xl bg-parchment border border-gold/45 text-sm font-semibold text-ink focus:outline-none focus:ring-2 focus:ring-imperial">
+                            <option value="1day" data-i18n="opt_days_1">1 Ngày trọn vẹn tại Cố đô</option>
+                            <option value="2days" data-i18n="opt_days_2">2 Ngày 1 Đêm khám phá chuyên sâu</option>
+                        </select>
+                    </div>
+
+                    <!-- 2. Theme Focus -->
+                    <div class="space-y-2">
+                        <label data-i18n="plan_lbl_theme" class="block text-xs font-bold uppercase tracking-wider text-ink-muted">2. Chủ đề ưu tiên</label>
+                        <select id="plan-theme" onchange="generateItinerary()" class="w-full p-3.5 rounded-2xl bg-parchment border border-gold/45 text-sm font-semibold text-ink focus:outline-none focus:ring-2 focus:ring-imperial">
+                            <option value="palace" data-i18n="opt_theme_palace">Kiến trúc Hoàng cung & Lịch sử</option>
+                            <option value="tombs" data-i18n="opt_theme_tombs">Hệ thống Lăng tẩm Triều Nguyễn</option>
+                            <option value="spiritual" data-i18n="opt_theme_spiritual">Tâm linh Sông Hương & Ẩm thực</option>
+                        </select>
+                    </div>
+
+                    <!-- 3. Attire Check -->
+                    <div class="space-y-2">
+                        <label data-i18n="plan_lbl_attire" class="block text-xs font-bold uppercase tracking-wider text-ink-muted">3. Trang phục dự kiến</label>
+                        <select id="plan-attire" onchange="generateItinerary()" class="w-full p-3.5 rounded-2xl bg-parchment border border-gold/45 text-sm font-semibold text-ink focus:outline-none focus:ring-2 focus:ring-imperial">
+                            <option value="aodai" data-i18n="opt_attire_aodai">Áo dài truyền thống / Cổ phục Việt</option>
+                            <option value="polite" data-i18n="opt_attire_polite">Áo có cổ & Quần dài / Váy qua gối</option>
+                            <option value="short" data-i18n="opt_attire_short">Quần đùi ngắn / Áo hai dây hở vai</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Output Grid: Dress Code Alert + Suggested Timeline -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <!-- Dress Code & Etiquette Notice (4 cols) -->
+                    <div id="dresscode-feedback" class="lg:col-span-4 p-6 rounded-2xl border-2 transition-all">
+                        <!-- Dynamically rendered -->
+                    </div>
+
+                    <!-- Generated Itinerary Schedule (8 cols) -->
+                    <div id="itinerary-output" class="lg:col-span-8 p-6 rounded-2xl bg-parchment border border-gold/30 space-y-4">
+                        <!-- Dynamically rendered -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. VISITOR GUESTBOOK -->
+    <section id="guestbook" class="py-16 sm:py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="text-center space-y-2">
+                <span data-i18n="gb_tag" class="inline-block px-3.5 py-1 rounded-full bg-gold/20 text-gold-dark font-bold text-xs uppercase tracking-wider">
+                    SỔ LƯU BÚT CỐ ĐÔ
+                </span>
+                <h2 data-i18n="gb_title" class="font-serif text-3xl sm:text-4xl font-bold text-ink">
+                    Cảm Tưởng Du Khách Về Xứ Huế
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Form (5 cols) -->
+                <form onsubmit="submitGuestbook(event)" class="lg:col-span-5 bg-parchment p-6 rounded-3xl border border-gold/35 space-y-4 shadow-sm h-fit">
+                    <div>
+                        <label data-i18n="gb_lbl_name" class="block text-xs font-bold text-ink-muted mb-1">Họ tên / Nơi đến</label>
+                        <input type="text" id="gb-name" required placeholder="VD: Lê Hoàng Nam • Đà Nẵng" class="w-full px-4 py-2.5 rounded-xl bg-white border border-gold/35 text-sm focus:outline-none focus:ring-2 focus:ring-imperial">
+                    </div>
+                    <div>
+                        <label data-i18n="gb_lbl_preset" class="block text-xs font-bold text-ink-muted mb-1">Gợi ý lời cảm nhận</label>
+                        <select id="gb-preset" onchange="applyPresetMessage()" class="w-full px-4 py-2.5 rounded-xl bg-white border border-gold/35 text-sm focus:outline-none focus:ring-2 focus:ring-imperial">
+                            <!-- Rendered via JS -->
+                        </select>
+                    </div>
+                    <div>
+                        <label data-i18n="gb_lbl_msg" class="block text-xs font-bold text-ink-muted mb-1">Lời lưu bút của bạn</label>
+                        <textarea id="gb-message" rows="3" required placeholder="Chia sẻ cảm xúc của bạn về di sản Cố đô Huế..." class="w-full px-4 py-2.5 rounded-xl bg-white border border-gold/35 text-sm focus:outline-none focus:ring-2 focus:ring-imperial"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-imperial hover:bg-imperial-dark text-white font-bold text-sm shadow transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                        <span data-i18n="gb_btn_submit">Gửi lời cảm tưởng</span>
+                    </button>
+                </form>
+
+                <!-- Entries List (7 cols) -->
+                <div id="guestbook-list" class="lg:col-span-7 space-y-3 max-h-96 overflow-y-auto pr-1">
+                    <!-- Rendered via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-ink text-parchment/80 py-12 border-t-4 border-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div class="space-y-1">
+                <div data-i18n="footer_title" class="font-serif text-xl font-bold text-white">
+                    Quần Thể Di Tích Cố Đô Huế • Complex of Hue Monuments
+                </div>
+                <p data-i18n="footer_address" class="text-xs sm:text-sm text-parchment/70">
+                    Thành phố Huế, Tỉnh Thừa Thiên Huế, Việt Nam • Di sản Thế giới UNESCO
+                </p>
+            </div>
+            <div class="text-xs text-parchment/60 max-w-md">
+                <p data-i18n="footer_disclaimer">
+                    Ứng dụng web giả lập tương tác phục vụ mục đích giới thiệu di sản văn hóa, kiến trúc và du lịch Cố đô Huế.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        let currentLang = 'vi';
+        let currentMonumentId = 'citadel';
+        let currentPhotoIdx = 0;
+        let lightingMode = 'dawn'; // 'dawn' or 'sunset'
+        let isSpeaking = false;
+        let panoOffset = -22;
+        let panoZoom = 1.0;
+        let audioCtx = null;
+
+        // Bilingual UI Strings
+        const i18n = {
+            vi: {
+                brand_title: "Quần Thể Di Tích Cố Đô Huế",
+                brand_sub: "Di sản Văn hóa Thế giới UNESCO • 1993",
+                nav_overview: "Tổng quan",
+                nav_explorer: "Bản đồ & Không gian 360°",
+                nav_culture: "Nhã nhạc & Văn hóa",
+                nav_planner: "Lịch trình & Quy định",
+                nav_guestbook: "Sổ lưu bút",
+
+                hero_badge: "DI SẢN VĂN HÓA THẾ GIỚI UNESCO (1993)",
+                hero_title: 'Quần Thể Di Tích <span class="text-gold-light block sm:inline">Cố Đô Huế</span>',
+                hero_subtitle: "Kinh đô của Việt Nam dưới triều đại nhà Nguyễn (1802 – 1945) bên dòng sông Hương thơ mộng — nơi hội tụ đỉnh cao nghệ thuật kiến trúc cung đình phương Đông, hệ thống lăng tẩm uy nghi và di sản Nhã nhạc cung đình bất hủ.",
+                hero_quote: "“Dòng Hương giang uốn lượn ôm lấy Kinh thành, núi Ngự Bình làm tiền án, tạo nên thế phong thủy sơn thủy hữu tình bậc nhất đất Việt.”",
+                hero_quote_author: "— Kinh đô Phú Xuân • Thừa Thiên Huế",
+                hero_cta_primary: "Khám phá Cố đô 360°",
+                hero_cta_secondary: "Trải nghiệm Nhã nhạc Huế",
+                hero_photo_tag: "Ảnh thực tế • Hoàng Thành Huế",
+                hero_photo_headline: "Ngọ Môn – Lầu Ngũ Phụng",
+                hero_photo_sub: "Cổng chính phía Nam Hoàng Thành Huế (Xây dựng năm 1833)",
+                hero_img_caption: "Di sản Văn hóa Thế giới • Quần thể Di tích Cố đô Huế",
+
+                exp_tag: "BẢN ĐỒ DI SẢN & KHÔNG GIAN SỐ",
+                exp_title: "Khám Phá 6 Di Sản Tiêu Biểu Dọc Sông Hương",
+                exp_desc: "Chọn từng điểm di tích trên bản đồ sông Hương để xoay góc nhìn toàn cảnh 360° từ ảnh chụp thực tế, chuyển đổi ánh sáng bình minh / hoàng hôn và nghe thuyết minh di sản bằng giọng nói.",
+                map_heading: "Bản đồ Quần thể Di tích Huế",
+                map_hint: "6 điểm di sản",
+                pano_badge: "Toàn cảnh 360° ảnh thực",
+                light_dawn: "Bình minh",
+                light_sunset: "Hoàng hôn",
+                pano_drag_hint: "Kéo ngang hoặc bấm mũi tên để xoay góc nhìn",
+                gallery_angle_label: "Góc chụp thực tế:",
+                audio_play: "Nghe thuyết minh",
+                audio_stop: "Dừng thuyết minh",
+
+                cult_tag: "DI SẢN PHI VẬT THỂ & TINH HOA CUNG ĐÌNH",
+                cult_title: "Nhã Nhạc Cung Đình Huế & Văn Hóa Cố Đô",
+                cult_desc: "Được UNESCO vinh danh là Kiệt tác Truyền khẩu và Di sản Phi vật thể của Nhân loại (2003), Nhã nhạc cung đình Huế kết hợp hài hòa giữa âm nhạc bác học, ẩm thực tinh tế và trang phục Áo dài ngũ thân truyền thống.",
+                nhanhac_badge: "TRÌNH MÔ PHỎNG ÂM THANH TƯƠNG TÁC",
+                nhanhac_heading: "Nhạc Cụ Tiêu Biểu Trong Dàn Nhã Nhạc",
+                nhanhac_play_all: "Hòa tấu một khúc ngắn",
+                inst_tyba_title: "Đàn Tỳ Bà (Pipa)",
+                inst_tyba_desc: "Nhạc cụ dây gảy 4 dây mang âm sắc trong trẻo, thánh thót, giữ vai trò dẫn dắt giai điệu chủ đạo trong dàn Tiểu nhạc cung đình Huế.",
+                inst_try_btn: "Gảy thử tiếng đàn",
+                inst_sao_title: "Sáo Trúc Cung Đình",
+                inst_sao_desc: "Chế tác từ trúc già tuyển chọn, âm thanh ngân vang sâu lắng gợi lên vẻ đẹp trầm mặc của núi Ngự, sông Hương trong các buổi yến tiệc hoàng gia.",
+                inst_try_sao: "Thổi thử âm sáo",
+                inst_trong_title: "Trống Chiến & Thanh La",
+                inst_trong_desc: "Giữ nhịp phách trang nghiêm và tạo khí thế uy nghi trong dàn Đại nhạc khi nhà vua thiết triều tại Điện Thái Hòa hay tế lễ đàn Nam Giao.",
+                inst_try_trong: "Gõ nhịp trống lễ",
+
+                cuisine_tag: "NGHỆ THUẬT ẨM THỰC",
+                cuisine_title: "Ẩm Thực Cung Đình & Dân Gian Huế",
+                cuisine_desc: "Ẩm thực Huế là sự giao thoa tinh xảo giữa ngự thiện cung đình cầu kỳ (Nem công chả phụng, Yến sào, Trà sen Tịnh Tâm) và hương vị dân gian đậm đà như Bún bò Huế, Cơm hến, Bánh bèo – nậm – lọc.",
+                aodai_tag: "TRANG PHỤC TRUYỀN THỐNG",
+                aodai_title: "Áo Dài Ngũ Thân & Nón Bài Thơ",
+                aodai_desc: "Khởi nguồn từ cuộc cải cách trang phục thời Chúa Nguyễn Phúc Khoát thế kỷ XVIII, Áo dài ngũ thân tượng trưng cho ngũ luân và đạo lý làm người, kết hợp cùng Nón bài thơ tạo nên nét duyên dáng thanh tao đặc trưng của xứ Huế.",
+
+                plan_tag: "CẨM NANG THAM QUAN CỐ ĐÔ",
+                plan_title: "Lập Lịch Trình & Kiểm Tra Trang Phục Tham Quan",
+                plan_desc: "Chọn thời gian lưu trú, chủ đề yêu thích và trang phục dự kiến để hệ thống gợi ý hành trình tham quan Đại Nội – Lăng tẩm tối ưu nhất.",
+                plan_lbl_days: "1. Thời lượng chuyến đi",
+                opt_days_1: "1 Ngày trọn vẹn tại Cố đô",
+                opt_days_2: "2 Ngày 1 Đêm khám phá chuyên sâu",
+                plan_lbl_theme: "2. Chủ đề ưu tiên",
+                opt_theme_palace: "Kiến trúc Hoàng cung & Lịch sử",
+                opt_theme_tombs: "Hệ thống Lăng tẩm Triều Nguyễn",
+                opt_theme_spiritual: "Tâm linh Sông Hương & Ẩm thực",
+                plan_lbl_attire: "3. Trang phục dự kiến",
+                opt_attire_aodai: "Áo dài truyền thống / Cổ phục Việt",
+                opt_attire_polite: "Áo có cổ & Quần dài / Váy qua gối",
+                opt_attire_short: "Quần đùi ngắn / Áo hai dây hở vai",
+
+                gb_tag: "SỔ LƯU BÚT CỐ ĐÔ",
+                gb_title: "Cảm Tưởng Du Khách Về Xứ Huế",
+                gb_lbl_name: "Họ tên / Nơi đến",
+                gb_lbl_preset: "Gợi ý lời cảm nhận",
+                gb_lbl_msg: "Lời lưu bút của bạn",
+                gb_btn_submit: "Gửi lời cảm tưởng",
+
+                footer_title: "Quần Thể Di Tích Cố Đô Huế • Complex of Hue Monuments",
+                footer_address: "Thành phố Huế, Tỉnh Thừa Thiên Huế, Việt Nam • Di sản Thế giới UNESCO",
+                footer_disclaimer: "Ứng dụng web giả lập tương tác phục vụ mục đích giới thiệu di sản văn hóa, kiến trúc và du lịch Cố đô Huế."
+            },
+            en: {
+                brand_title: "Complex of Hue Monuments",
+                brand_sub: "UNESCO World Heritage Site • 1993",
+                nav_overview: "Overview",
+                nav_explorer: "Map & 360° Explorer",
+                nav_culture: "Court Music & Culture",
+                nav_planner: "Itinerary & Rules",
+                nav_guestbook: "Guestbook",
+
+                hero_badge: "UNESCO WORLD HERITAGE SITE (1993)",
+                hero_title: 'Complex of <span class="text-gold-light block sm:inline">Hue Monuments</span>',
+                hero_subtitle: "The imperial capital of Vietnam under the Nguyen Dynasty (1802 – 1945) along the poetic Perfume River — uniting oriental royal architecture, majestic imperial tombs, and timeless Nha Nhac court music.",
+                hero_quote: "“The Perfume River winds gracefully around the Citadel while Ngu Binh Mountain stands as a natural screen, forming Vietnam's finest feng-shui landscape.”",
+                hero_quote_author: "— Imperial Capital of Phu Xuan • Thua Thien Hue",
+                hero_cta_primary: "Explore Hue in 360°",
+                hero_cta_secondary: "Experience Nha Nhac Music",
+                hero_photo_tag: "Real Photography • Hue Imperial Citadel",
+                hero_photo_headline: "Ngo Mon Gate – Five-Phoenix Pavilion",
+                hero_photo_sub: "Main Southern Gate of the Imperial City (Built in 1833)",
+                hero_img_caption: "UNESCO World Heritage Site • Complex of Hue Monuments",
+
+                exp_tag: "HERITAGE MAP & DIGITAL EXPLORER",
+                exp_title: "Discover 6 Iconic Landmarks Along the Perfume River",
+                exp_desc: "Select any landmark on the Perfume River map to pan 360° real photography views, switch between dawn and sunset lighting, and listen to bilingual voice narration.",
+                map_heading: "Hue Monuments Masterplan",
+                map_hint: "6 Heritage Sites",
+                pano_badge: "Real-Photo 360° Panorama",
+                light_dawn: "Dawn",
+                light_sunset: "Sunset",
+                pano_drag_hint: "Drag horizontally or use arrows to pan view",
+                gallery_angle_label: "Real Photo Angles:",
+                audio_play: "Play Audio Guide",
+                audio_stop: "Stop Narration",
+
+                cult_tag: "INTANGIBLE HERITAGE & IMPERIAL ARTS",
+                cult_title: "Nha Nhac Royal Court Music & Hue Culture",
+                cult_desc: "Proclaimed by UNESCO as a Masterpiece of the Oral and Intangible Heritage of Humanity (2003), Nha Nhac court music harmonizes with refined royal cuisine and the traditional five-panel Ao Dai.",
+                nhanhac_badge: "INTERACTIVE SOUND SYNTHESIZER",
+                nhanhac_heading: "Signature Instruments of the Royal Ensemble",
+                nhanhac_play_all: "Play Royal Ensemble Phrase",
+                inst_tyba_title: "Dan Ty Ba (Four-String Lute)",
+                inst_tyba_desc: "A pear-shaped plucked lute with a crystalline, resonant timbre that leads the melody in Hue's chamber court orchestra (Tieu Nhac).",
+                inst_try_btn: "Pluck Lute Strings",
+                inst_sao_title: "Imperial Bamboo Flute",
+                inst_sao_desc: "Crafted from seasoned bamboo, its serene, lyrical notes evoke the misty tranquility of Ngu Binh Mountain and the Perfume River.",
+                inst_try_sao: "Play Flute Melody",
+                inst_trong_title: "Ceremonial Drum & Gong",
+                inst_trong_desc: "Sets the solemn cadence in the Grand Orchestra (Dai Nhac) during imperial audiences at Thai Hoa Palace and Heaven Worship rituals.",
+                inst_try_trong: "Strike Ceremonial Beat",
+
+                cuisine_tag: "CULINARY ARTISTRY",
+                cuisine_title: "Imperial Gastronomy & Hue Folk Cuisine",
+                cuisine_desc: "Hue cuisine bridges elaborate royal banquets (lotus-scented Tinh Tam tea, sculpted delicacies) with beloved local specialties like Bun Bo Hue, Clam Rice, and steamed rice cakes.",
+                aodai_tag: "TRADITIONAL ATTIRE",
+                aodai_title: "Five-Panel Ao Dai & Poem Conical Hat",
+                aodai_desc: "Originating in the 18th-century court of Lord Nguyen Phuc Khoat, the five-panel Ao Dai symbolizes Confucian virtues and pairs gracefully with Hue's translucent Poem Hat.",
+
+                plan_tag: "VISITOR HANDBOOK",
+                plan_title: "Itinerary Planner & Dress-Code Check",
+                plan_desc: "Choose your trip duration, thematic interest, and planned attire to generate a tailored Citadel & Royal Tombs itinerary along with etiquette reminders.",
+                plan_lbl_days: "1. Trip Duration",
+                opt_days_1: "1 Full Day in the Imperial City",
+                opt_days_2: "2 Days / 1 Night Deep Heritage Tour",
+                plan_lbl_theme: "2. Preferred Focus",
+                opt_theme_palace: "Imperial Palace Architecture & History",
+                opt_theme_tombs: "Nguyen Dynasty Royal Tombs",
+                opt_theme_spiritual: "Perfume River Spirituality & Cuisine",
+                plan_lbl_attire: "3. Planned Attire",
+                opt_attire_aodai: "Traditional Ao Dai / Vietnamese Attire",
+                opt_attire_polite: "Collared shirt & Long pants / Knee-length skirt",
+                opt_attire_short: "Short shorts / Sleeveless off-shoulder top",
+
+                gb_tag: "IMPERIAL GUESTBOOK",
+                gb_title: "Visitor Reflections on Hue",
+                gb_lbl_name: "Your Name / Hometown",
+                gb_lbl_preset: "Quick Reflection Template",
+                gb_lbl_msg: "Your Message",
+                gb_btn_submit: "Post Reflection",
+
+                footer_title: "Complex of Hue Monuments • Quần Thể Di Tích Cố Đô Huế",
+                footer_address: "Hue City, Thua Thien Hue Province, Vietnam • UNESCO World Heritage",
+                footer_disclaimer: "Interactive educational and cultural heritage simulation showcasing the Complex of Hue Monuments."
+            }
+        };
+
+        // 6 Iconic Hue Heritage Sites Data with Real Wikimedia Commons Photography + Verified Fallbacks
+        const monumentsData = {
+            citadel: {
+                num: 1,
+                photos: [
+                    {
+                        url: "https://commons.wikimedia.org/wiki/Special:FilePath/C%E1%BB%95ng_Ng%E1%BB%8D_M%C3%B4n_Hu%E1%BA%BF.jpg?width=1280",
+                        thumb: "https://commons.wikimedia.org/wiki/Special:FilePath/C%E1%BB%95ng_Ng%E1%BB%8D_M%C3%B4n_Hu%E1%BA%BF.jpg?width=320",
+                        vi: "Cổng Ngọ Môn",
+                        en: "Ngo Mon Gate"
+                    },
+                    {
+                        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Thai_Hoa_palace.jpg?width=1280",
+                        thumb: "https://commons.wikimedia.org/wiki/Special:FilePath/Thai_Hoa_palace.jpg?width=320",
+                        vi: "Điện Thái Hòa",
+                        en: "Thai Hoa Palace"
+                    },
+                    {
+                        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Ng%E1%BB%8D_M%C3%B4n_Hu%E1%BA%BF_-_NKS.jpg?width=1280",
+                        thumb: "https://commons.wikimedia.org/wiki/Special:FilePath/Ng%E1%BB%8D_M%C3%B4n_Hu%E1%BA%BF_-_NKS.jpg?width=320",
+                        vi: "Toàn cảnh Hoàng Thành",
+                        en: "Imperial Enclosure"
+                    }
+                ],
+                vi: {
+                    cat: "Di tích #1 • Trung tâm Hoàng Thành",
+                    title: "Đại Nội Huế (Ngọ Môn & Điện Thái Hòa)",
+                    desc: "Đại Nội Huế gồm Hoàng Thành và Tử Cấm Thành, khởi công năm 1804 dưới triều vua Gia Long. Cổng chính Ngọ Môn với Lầu Ngũ Phụng lợp ngói hoàng lưu ly rực rỡ dẫn qua cầu Trung Đạo tới Điện Thái Hòa — nơi đặt ngai vàng và tổ chức các đại lễ thiết triều.",
+                    highlights: [
+                        { label: "Khởi công", val: "Năm 1804 (Vua Gia Long)" },
+                        { label: "Kiến trúc", val: "Ngói Hoàng Lưu Ly" },
+                        { label: "Công trình", val: "Ngọ Môn • Điện Thái Hòa" }
+                    ]
+                },
+                en: {
+                    cat: "Monument #1 • Heart of the Citadel",
+                    title: "Hue Imperial City (Ngo Mon & Thai Hoa Palace)",
+                    desc: "Encompassing the Imperial Enclosure and the Forbidden Purple City, construction began in 1804 under Emperor Gia Long. The majestic Ngo Mon Gate topped by the Five-Phoenix Pavilion leads across the Golden Water Bridge to Thai Hoa Palace, seat of the Dragon Throne.",
+                    highlights: [
+                        { label: "Founded", val: "1804 (Emperor Gia Long)" },
+                        { label: "Roof Tiles", val: "Imperial Yellow Glaze" },
+                        { label: "Key Icons", val: "Ngo Mon • Thai Hoa" }
+                    ]
+                },
+                fallbackSvg: `<svg viewBox="0 0 1200 400" class="w-full h-full object-cover" preserveAspectRatio="none"><rect width="1200" height="400" fill="#541010"/><rect x="240" y="195" width="720" height="90" fill="#44403C"/><rect x="470" y="125" width="260" height="70" fill="#991B1B"/><path d="M 440 135 Q 600 95 760 135 Z" fill="#F59E0B"/></svg>`
+            },
+            thienmu: {
+                num: 2,
+                photos: [
+                    {
+                        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Hue_Thien_Mu-Pagoda.JPG?width=1280",
+                        thumb: "https://commons.wikimedia.org/wiki/Special:FilePath/Hue_Thien_Mu-Pagoda.JPG?width=320",
+                        vi: "Tháp Phước Duyên",
+                        en: "Phuoc Duyen Tower"
+                    },
+                    {
+                        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Ch%C3%B9a_Thi%C3%AAn_M%E1%BB%A5%2C_Hu%E1%BA%BF.jpg?width=1280",
+                        thumb: "https://commons.wikimedia.org/wiki/Special:FilePath/Ch%C3%B9a_Thi%C3%AAn_M%E1%BB%A5%2C_Hu%E1%BA%BF.jpg?width=320",
+                        vi: "Chùa Thiên Mụ bên Sông Hương",
+                        en: "Thien Mu by Perfume River"
+                    }
+                ],
+                vi: {
+                    cat: "Di tích #2 • Đồi Hà Khê bên Sông Hương",
+                    title: "Chùa Thiên Mụ & Tháp Phước Duyên",
+                    desc: "Ngôi cổ tự linh thiêng bậc nhất xứ Huế được Chúa Nguyễn Hoàng cho xây dựng từ năm 1601 trên đồi Hà Khê nhìn xuống dòng sông Hương. Nổi bật là tháp Phước Duyên 7 tầng cao 21 mét hình bát giác — biểu tượng văn hóa và tâm linh bất diệt của Cố đô.",
+                    highlights: [
+                        { label: "Niên đại", val: "Năm 1601 (Chúa Tiên)" },
+                        { label: "Tháp cổ", val: "Phước Duyên 7 tầng" },
+                        { label: "Vị trí", val: "Đồi Hà Khê • Sông Hương" }
+                    ]
+                },
+                en: {
+                    cat: "Monument #2 • Ha Khe Hill by the River",
+                    title: "Thien Mu Pagoda & Phuoc Duyen Tower",
+                    desc: "Hue's oldest and most revered Buddhist temple, founded in 1601 by Lord Nguyen Hoang overlooking the Perfume River. Its iconic 21-meter, seven-story octagonal Phuoc Duyen Tower stands as the enduring spiritual emblem of the ancient capital.",
+                    highlights: [
+                        { label: "Founded", val: "1601 (Lord Nguyen Hoang)" },
+                        { label: "Pagoda", val: "7-Tier Phuoc Duyen" },
+                        { label: "Setting", val: "Ha Khe Hill • Riverbank" }
+                    ]
+                },
+                fallbackSvg: `<svg viewBox="0 0 1200 400" class="w-full h-full object-cover" preserveAspectRatio="none"><rect width="1200" height="400" fill="#123D37"/><rect x="572" y="65" width="56" height="205" fill="#9A3412"/><polygon points="560,82 600,64 640,82" fill="#F59E0B"/></svg>`
+            },
+            river: {
+                num: 3,
+                photos: [
+                    {
+                        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Perfume_River_Bridge_Hue_01.jpg?width=1280",
+                        thumb: "https://commons.wikimedia.org/wiki/Special:FilePath/Perfume_River_Bridge_Hue_01.jpg?width=320",
+                        vi: "Cầu Trường Tiền & Sông Hương",
+                        en: "Truong Tien Bridge & River"
+                    },
+                    {
+                        url: "https://commons.wikimedia.org/wiki/Special:FilePath/RiviereParfums_03.jpg?width=1280",
+                        thumb: "https://commons.wikimedia.org/wiki/Special:FilePath/RiviereParfums_03.jpg?width=320",
+                        vi: "Dòng Hương Giang thơ mộng",
+                        en: "Scenic Perfume River"
+                    }
+                ],
+                vi: {
+                    cat: "Di tích #3 • Cảnh quan Di sản",
+                    title: "Sông Hương & Cầu Trường Tiền",
+                    desc: "Dòng sông Hương xanh biếc chảy qua lòng thành phố Huế, phản chiếu bóng dáng cầu Trường Tiền 6 vài 12 nhịp duyên dáng được xây dựng từ năm 1899. Nơi đây gắn liền với những đêm Ca Huế trên thuyền rồng và lễ hội thả hoa đăng lung linh.",
+                    highlights: [
+                        { label: "Chiều dài cầu", val: "402,6 mét (6 vài 12 nhịp)" },
+                        { label: "Năm xây dựng", val: "1899 (Thời vua Thành Thái)" },
+                        { label: "Trải nghiệm", val: "Ca Huế trên Sông Hương" }
+                    ]
+                },
+                en: {
+                    cat: "Monument #3 • Cultural Landscape",
+                    title: "Perfume River & Truong Tien Bridge",
+                    desc: "The emerald Perfume River meanders gracefully through the heart of Hue beneath the six-span, twelve-arch Truong Tien Bridge built in 1899. Famous for moonlit royal dragon boat cruises and traditional Ca Hue chamber singing.",
+                    highlights: [
+                        { label: "Bridge Span", val: "402.6m (6 Steel Arches)" },
+                        { label: "Built", val: "1899 (Emperor Thanh Thai)" },
+                        { label: "Highlight", val: "Dragon Boat Ca Hue" }
+                    ]
+                },
+                fallbackSvg: `<svg viewBox="0 0 1200 400" class="w-full h-full object-cover" preserveAspectRatio="none"><rect width="1200" height="240" fill="#0284C7"/><rect x="0" y="240" width="1200" height="160" fill="#0F766E"/></svg>`
+            },
+            tuduc: {
+                num: 4,
+                photos: [
+                    {
+                        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Hue_-_Tomb_of_Emperor_Tu_Duc_-_001.jpg?width=1280",
+                        thumb: "https://commons.wikimedia.org/wiki/Special:FilePath/Hue_-_Tomb_of_Emperor_Tu_Duc_-_001.jpg?width=320",
+                        vi: "Xung Khiêm Tạ & Hồ Lưu Khiêm",
+                        en: "Xung Khiem Water Pavilion"
+                    },
+                    {
+                        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Hue_-_Tomb_of_Emperor_Tu_Duc_-_002.jpg?width=1280",
+                        thumb: "https://commons.wikimedia.org/wiki/Special:FilePath/Hue_-_Tomb_of_Emperor_Tu_Duc_-_002.jpg?width=320",
+                        vi: "Không gian Lăng Tự Đức",
+                        en: "Tu Duc Royal Grounds"
+                    }
+                ],
+                vi: {
+                    cat: "Di tích #4 • Lăng tẩm Thi sĩ Hoàng gia",
+                    title: "Lăng Tự Đức (Khiêm Lăng)",
+                    desc: "Được đánh giá là một trong những công trình đẹp nhất của kiến trúc cung đình thời Nguyễn (xây dựng 1864–1867). Nằm giữa rừng thông bạt ngàn bên hồ Lưu Khiêm đầy hoa sen, Khiêm Lăng mang vẻ đẹp trữ tình như một công viên hoàng gia thanh bình.",
+                    highlights: [
+                        { label: "Xây dựng", val: "1864 – 1867" },
+                        { label: "Cảnh quan", val: "Hồ Lưu Khiêm & Xung Khiêm Tạ" },
+                        { label: "Phong cách", val: "Thơ mộng, hài hòa thiên nhiên" }
+                    ]
+                },
+                en: {
+                    cat: "Monument #4 • The Poet Emperor's Retreat",
+                    title: "Tomb of Emperor Tu Duc (Khiem Lang)",
+                    desc: "Widely celebrated as the most picturesque of all Nguyen Dynasty royal tombs (built 1864–1867). Set within a fragrant pine forest beside lotus-filled Luu Khiem Lake, it resembles a serene imperial pleasure garden.",
+                    highlights: [
+                        { label: "Built", val: "1864 – 1867" },
+                        { label: "Pavilion", val: "Xung Khiem Water Pavilion" },
+                        { label: "Character", val: "Poetic & Harmonious" }
+                    ]
+                },
+                fallbackSvg: `<svg viewBox="0 0 1200 400" class="w-full h-full object-cover" preserveAspectRatio="none"><rect width="1200" height="400" fill="#14532D"/><rect x="440" y="165" width="320" height="65" fill="#7C1D1D"/></svg>`
+            },
+            khaidinh: {
+                num: 5,
+                photos: [
+                    {
+                        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Khai_Dinh_Mausoleum_Hue_(27767160179).jpg?width=1280",
+                        thumb: "https://commons.wikimedia.org/wiki/Special:FilePath/Khai_Dinh_Mausoleum_Hue_(27767160179).jpg?width=320",
+                        vi: "Toàn cảnh Lăng Khải Định",
+                        en: "Khai Dinh Mausoleum"
+                    },
+                    {
+                        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Kh%E1%BA%A3i_%C4%90%E1%BB%8Bnh_tomb.jpg?width=1280",
+                        thumb: "https://commons.wikimedia.org/wiki/Special:FilePath/Kh%E1%BA%A3i_%C4%90%E1%BB%8Bnh_tomb.jpg?width=320",
+                        vi: "Sân chầu & Cung Thiên Định",
+                        en: "Thien Dinh Palace Terrace"
+                    }
+                ],
+                vi: {
+                    cat: "Di tích #5 • Đỉnh cao Nghệ thuật Khảm Sành Sứ",
+                    title: "Lăng Khải Định (Ứng Lăng)",
+                    desc: "Tọa lạc trên triền núi Châu Chữ (xây dựng 1920–1931), Ứng Lăng gây ấn tượng mạnh mẽ với lối kiến trúc giao thoa Á – Âu độc đáo. Bên trong cung Thiên Định là kiệt tác nghệ thuật khảm sành sứ, thủy tinh màu tinh xảo cùng bức tranh 'Cửu Long Ẩn Vân' trên trần.",
+                    highlights: [
+                        { label: "Xây dựng", val: "1920 – 1931 (11 năm)" },
+                        { label: "Nghệ thuật", val: "Khảm sành sứ & Thủy tinh" },
+                        { label: "Phong cách", val: "Giao thoa Á – Âu độc đáo" }
+                    ]
+                },
+                en: {
+                    cat: "Monument #5 • Masterpiece of Porcelain Mosaic",
+                    title: "Tomb of Emperor Khai Dinh (Ung Lang)",
+                    desc: "Dramatically terraced up Chau Chu Mountain (built 1920–1931), Ung Lang blends traditional Vietnamese motifs with European Gothic and Baroque influences. Inside Thien Dinh Palace dazzles intricate porcelain and colored-glass mosaics.",
+                    highlights: [
+                        { label: "Built", val: "1920 – 1931 (11 Years)" },
+                        { label: "Craft", val: "Porcelain & Glass Mosaic" },
+                        { label: "Fusion", val: "East-West Architecture" }
+                    ]
+                },
+                fallbackSvg: `<svg viewBox="0 0 1200 400" class="w-full h-full object-cover" preserveAspectRatio="none"><rect width="1200" height="400" fill="#334155"/><rect x="450" y="105" width="300" height="80" fill="#64748B"/></svg>`
+            },
+            minhmang: {
+                num: 6,
+                photos: [
+                    {
+                        url: "https://commons.wikimedia.org/wiki/Special:FilePath/Hue_Vietnam_Tomb-of-Emperor-Minh-Mang-01.jpg?width=1280",
+                        thumb: "https://commons.wikimedia.org/wiki/Special:FilePath/Hue_Vietnam_Tomb-of-Emperor-Minh-Mang-01.jpg?width=320",
+                        vi: "Minh Lâu & Hồ Trừng Minh",
+                        en: "Minh Lau Pavilion"
+                    }
+                ],
+                vi: {
+                    cat: "Di tích #6 • Kiến trúc Đối xứng Chuẩn mực",
+                    title: "Lăng Minh Mạng (Hiếu Lăng)",
+                    desc: "Nằm trên núi Cẩm Kê gần ngã ba Bằng Lãng nơi hợp lưu của hai nhánh sông Hương (xây dựng 1840–1843). Hiếu Lăng gồm 40 công trình lớn nhỏ bố trí đối xứng tuyệt đối trên trục thần đạo dài 700m, biểu trưng cho sự uy nghiêm, chuẩn mực của Nho giáo.",
+                    highlights: [
+                        { label: "Xây dựng", val: "1840 – 1843" },
+                        { label: "Bố cục", val: "40 công trình đối xứng" },
+                        { label: "Vị trí", val: "Ngã ba Bằng Lãng • Sông Hương" }
+                    ]
+                },
+                en: {
+                    cat: "Monument #6 • Symmetrical Imperial Grandeur",
+                    title: "Tomb of Emperor Minh Mang (Hieu Lang)",
+                    desc: "Set on Cam Ke Hill near the Bang Lang confluence of the Perfume River (built 1840–1843), Hieu Lang comprises 40 palaces, pavilions, and bridges aligned along a 700-meter sacred axis embodying Confucian symmetry and dignity.",
+                    highlights: [
+                        { label: "Built", val: "1840 – 1843" },
+                        { label: "Layout", val: "40 Symmetrical Structures" },
+                        { label: "Location", val: "Bang Lang Confluence" }
+                    ]
+                },
+                fallbackSvg: `<svg viewBox="0 0 1200 400" class="w-full h-full object-cover" preserveAspectRatio="none"><rect width="1200" height="400" fill="#0D9488"/><rect x="490" y="135" width="220" height="65" fill="#7C1D1D"/></svg>`
+            }
+        };
+
+        // Graceful Image Fallback Handler so broken images never appear
+        function handleImageFallback(imgEl, monumentKey) {
+            if (imgEl.dataset.fallbackSrc && imgEl.src !== imgEl.dataset.fallbackSrc) {
+                imgEl.src = imgEl.dataset.fallbackSrc;
+                imgEl.dataset.fallbackSrc = '';
+                return;
+            }
+            const item = monumentsData[monumentKey] || monumentsData.citadel;
+            const wrapper = imgEl.parentElement;
+            if (wrapper) {
+                imgEl.style.display = 'none';
+                const fallbackDiv = document.createElement('div');
+                fallbackDiv.className = 'w-full h-full';
+                fallbackDiv.innerHTML = item.fallbackSvg;
+                wrapper.prepend(fallbackDiv);
+            }
+        }
+
+        // Render Real Photo into the 360° Panoramic Canvas with Dawn/Sunset Lighting Overlay
+        function renderPanoramaPhoto() {
+            const item = monumentsData[currentMonumentId];
+            const photoObj = item.photos[currentPhotoIdx] || item.photos[0];
+            const isSunset = lightingMode === 'sunset';
+
+            const filterStyle = isSunset
+                ? 'filter: sepia(0.28) saturate(1.35) contrast(1.06) brightness(0.92);'
+                : 'filter: saturate(1.12) contrast(1.03) brightness(1.04);';
+
+            const overlayGradient = isSunset
+                ? 'background: linear-gradient(180deg, rgba(124, 29, 29, 0.25) 0%, rgba(217, 119, 6, 0.18) 60%, rgba(28, 25, 23, 0.45) 100%);'
+                : 'background: linear-gradient(180deg, rgba(14, 116, 144, 0.12) 0%, rgba(254, 243, 199, 0.08) 60%, rgba(28, 25, 23, 0.35) 100%);';
+
+            const canvas = document.getElementById('panorama-canvas');
+            canvas.innerHTML = `
+                <div class="w-full h-full relative overflow-hidden">
+                    <img
+                        src="${photoObj.url}"
+                        alt="${photoObj[currentLang]}"
+                        onerror="handleImageFallback(this, '${currentMonumentId}')"
+                        style="${filterStyle} transform: scale(${panoZoom});"
+                        class="w-full h-full object-cover object-center transition-all duration-500 select-none pointer-events-none"
+                    >
+                    <div class="absolute inset-0 pointer-events-none transition-all duration-500" style="${overlayGradient}"></div>
+                </div>
+            `;
+        }
+
+        // Render Photo Angle Thumbnails Strip
+        function renderPhotoAngleStrip() {
+            const item = monumentsData[currentMonumentId];
+            const strip = document.getElementById('photo-angle-strip');
+            strip.innerHTML = item.photos.map((p, idx) => {
+                const active = idx === currentPhotoIdx;
+                return `
+                    <button onclick="selectPhotoAngle(${idx})" class="flex items-center gap-2 px-2.5 py-1 rounded-xl border text-xs font-semibold transition-all shrink-0 ${active ? 'bg-imperial text-white border-imperial shadow-sm' : 'bg-white text-ink hover:bg-gold/15 border-gold/30'}">
+                        <img src="${p.thumb}" alt="${p[currentLang]}" onerror="this.style.display='none'" class="w-7 h-5 rounded object-cover">
+                        <span>${p[currentLang]}</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectPhotoAngle(idx) {
+            currentPhotoIdx = idx;
+            renderPanoramaPhoto();
+            renderPhotoAngleStrip();
+        }
+
+        function adjustPanoZoom(delta) {
+            panoZoom = Math.max(1.0, Math.min(1.6, +(panoZoom + delta).toFixed(2)));
+            const label = document.getElementById('pano-zoom-label');
+            if (label) label.textContent = `${panoZoom.toFixed(1)}x`;
+            renderPanoramaPhoto();
+        }
+
+        // Guestbook Initial Entries & Templates
+        let guestbookEntries = [
+            {
+                name: "Nguyễn Thảo Vy • Hà Nội",
+                time: "Hôm nay",
+                msg: "Đứng dưới lầu Ngũ Phụng Ngọ Môn ngắm nắng sớm chiếu lên mái ngói hoàng lưu ly, cảm nhận trọn vẹn vẻ đẹp trầm mặc và hào hoa của Cố đô Huế."
+            },
+            {
+                name: "David Henderson • Melbourne",
+                time: "1 day ago",
+                msg: "Listening to Nha Nhac court music and drifting along the Perfume River at sunset was the highlight of our Vietnam journey."
+            },
+            {
+                name: "Trần Minh Khoa • Thừa Thiên Huế",
+                time: "3 days ago",
+                msg: "Tự hào là người con xứ Huế — nơi lưu giữ kho tàng di sản kiến trúc và văn hóa cung đình độc đáo của dân tộc."
+            }
+        ];
+
+        const guestbookPresets = {
+            vi: [
+                { label: "-- Chọn gợi ý hoặc tự viết cảm nhận --", text: "" },
+                { label: "Vẻ đẹp trầm mặc & uy nghi", text: "Quần thể di tích Cố đô Huế thật sự tráng lệ và thơ mộng. Sự hài hòa giữa kiến trúc cung đình và dòng sông Hương để lại ấn tượng khó phai." },
+                { label: "Ấn tượng với Nhã nhạc & Áo dài", text: "Khoác lên mình tà Áo dài ngũ thân dạo bước trong Đại Nội và thưởng thức Nhã nhạc cung đình là trải nghiệm văn hóa tuyệt vời nhất!" }
+            ],
+            en: [
+                { label: "-- Choose a template or write your own --", text: "" },
+                { label: "Timeless Royal Beauty", text: "The Complex of Hue Monuments is breathtaking — a serene harmony of imperial architecture, lush gardens, and the poetic Perfume River." },
+                { label: "Enchanted by Nha Nhac Music", text: "Experiencing Nha Nhac court music and exploring the Nguyen Dynasty tombs gave us deep appreciation for Vietnam's royal heritage." }
+            ]
+        };
+
+        // Toast Helper
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const bgClass = type === 'success' ? 'bg-jade-dark border-emerald-400' : (type === 'warn' ? 'bg-amber-800 border-amber-400' : 'bg-ink border-gold');
+            toast.className = `pointer-events-auto px-4 py-3 rounded-2xl text-white text-xs sm:text-sm font-medium shadow-xl border ${bgClass} flex items-center gap-2.5 transition-all transform translate-y-2 opacity-0`;
+            toast.innerHTML = `<i class="fa-solid fa-crown text-gold-light"></i><span>${message}</span>`;
+            container.appendChild(toast);
+
+            requestAnimationFrame(() => toast.classList.remove('translate-y-2', 'opacity-0'));
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        // Language Switcher VI <-> EN
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+
+            if (isSpeaking) stopAudioNarration();
+
+            const btnVi = document.getElementById('btn-lang-vi');
+            const btnEn = document.getElementById('btn-lang-en');
+            if (lang === 'vi') {
+                btnVi.className = "px-3.5 py-1.5 rounded-full text-xs font-bold transition-all bg-imperial text-white shadow-sm";
+                btnEn.className = "px-3.5 py-1.5 rounded-full text-xs font-bold transition-all text-ink-muted hover:text-imperial";
+            } else {
+                btnEn.className = "px-3.5 py-1.5 rounded-full text-xs font-bold transition-all bg-imperial text-white shadow-sm";
+                btnVi.className = "px-3.5 py-1.5 rounded-full text-xs font-bold transition-all text-ink-muted hover:text-imperial";
+            }
+
+            document.getElementById('nav-brand-title').textContent = i18n[lang].brand_title;
+            document.getElementById('nav-brand-sub').textContent = i18n[lang].brand_sub;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang][key]) {
+                    el.innerHTML = i18n[lang][key];
+                }
+            });
+
+            renderMonumentList();
+            selectMonument(currentMonumentId);
+            generateItinerary();
+            renderGuestbookPresets();
+            renderGuestbookList();
+
+            showToast(lang === 'vi' ? 'Đã chuyển sang Tiếng Việt' : 'Switched to English');
+        }
+
+        // Render 6 Monuments Selector List
+        function renderMonumentList() {
+            const listEl = document.getElementById('monument-list');
+            listEl.innerHTML = Object.keys(monumentsData).map(key => {
+                const item = monumentsData[key];
+                const content = item[currentLang];
+                const isActive = key === currentMonumentId;
+                return `
+                    <button onclick="selectMonument('${key}')" class="w-full text-left px-3.5 py-2.5 rounded-2xl transition-all flex items-center justify-between border ${isActive ? 'bg-imperial text-white border-imperial shadow-md' : 'bg-parchment hover:bg-parchment-dark text-ink border-gold/25'}">
+                        <div class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center ${isActive ? 'bg-gold text-ink' : 'bg-imperial/15 text-imperial'}">
+                                ${item.num}
+                            </span>
+                            <span class="text-xs sm:text-sm font-semibold">${content.title}</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-xs ${isActive ? 'text-gold-light' : 'text-ink-muted/50'}"></i>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        // Select Monument on Map or List
+        function selectMonument(id) {
+            currentMonumentId = id;
+            currentPhotoIdx = 0;
+            panoZoom = 1.0;
+            const zoomLabel = document.getElementById('pano-zoom-label');
+            if (zoomLabel) zoomLabel.textContent = '1.0x';
+
+            if (isSpeaking) stopAudioNarration();
+
+            const item = monumentsData[id];
+            const content = item[currentLang];
+
+            document.querySelectorAll('.hotspot-btn').forEach(btn => {
+                btn.classList.remove('bg-gold', 'text-ink', 'hotspot-pulse', 'scale-110', 'z-20');
+                btn.classList.add('bg-imperial', 'text-white', 'z-10');
+            });
+            const activePin = document.getElementById(`pin-${id}`);
+            if (activePin) {
+                activePin.classList.remove('bg-imperial', 'text-white', 'z-10');
+                activePin.classList.add('bg-gold', 'text-ink', 'hotspot-pulse', 'scale-110', 'z-20');
+            }
+
+            renderPanoramaPhoto();
+            renderPhotoAngleStrip();
+
+            document.getElementById('monument-category').textContent = content.cat;
+            document.getElementById('monument-title').textContent = content.title;
+            document.getElementById('monument-description').textContent = content.desc;
+
+            document.getElementById('monument-highlights').innerHTML = content.highlights.map(h => `
+                <div class="p-3.5 rounded-2xl bg-parchment border border-gold/30">
+                    <span class="block text-[11px] uppercase tracking-wider text-ink-muted font-semibold">${h.label}</span>
+                    <span class="block font-serif font-bold text-sm sm:text-base text-imperial mt-0.5">${h.val}</span>
+                </div>
+            `).join('');
+
+            renderMonumentList();
+        }
+
+        // Toggle Dawn / Sunset Lighting Mode
+        function setLightingMode(mode) {
+            lightingMode = mode;
+            const btnDawn = document.getElementById('btn-light-dawn');
+            const btnSunset = document.getElementById('btn-light-sunset');
+            if (mode === 'dawn') {
+                btnDawn.className = "px-3 py-1 rounded-full text-xs font-bold transition-all bg-gold text-ink flex items-center gap-1.5";
+                btnSunset.className = "px-3 py-1 rounded-full text-xs font-bold transition-all text-white/85 hover:text-white flex items-center gap-1.5";
+            } else {
+                btnSunset.className = "px-3 py-1 rounded-full text-xs font-bold transition-all bg-gold text-ink flex items-center gap-1.5";
+                btnDawn.className = "px-3 py-1 rounded-full text-xs font-bold transition-all text-white/85 hover:text-white flex items-center gap-1.5";
+            }
+            renderPanoramaPhoto();
+        }
+
+        // Panorama Drag & Arrow Panning
+        function panPanorama(deltaPx) {
+            panoOffset = Math.max(-44, Math.min(0, panoOffset + (deltaPx * 0.15)));
+            document.getElementById('panorama-canvas').style.transform = `translateX(${panoOffset}%)`;
+        }
+
+        function initPanoramaDrag() {
+            const viewport = document.getElementById('panorama-container');
+            let isDragging = false;
+            let startX = 0;
+
+            viewport.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.clientX;
+            });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const dx = e.clientX - startX;
+                startX = e.clientX;
+                panoOffset = Math.max(-44, Math.min(0, panoOffset + dx * 0.08));
+                document.getElementById('panorama-canvas').style.transform = `translateX(${panoOffset}%)`;
+            });
+
+            viewport.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                startX = e.touches[0].clientX;
+            }, { passive: true });
+            viewport.addEventListener('touchend', () => { isDragging = false; });
+            viewport.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const dx = e.touches[0].clientX - startX;
+                startX = e.touches[0].clientX;
+                panoOffset = Math.max(-44, Math.min(0, panoOffset + dx * 0.1));
+                document.getElementById('panorama-canvas').style.transform = `translateX(${panoOffset}%)`;
+            }, { passive: true });
+        }
+
+        // Web Speech API Narration
+        function toggleAudioNarration() {
+            if (!('speechSynthesis' in window)) {
+                showToast(currentLang === 'vi' ? 'Trình duyệt không hỗ trợ đọc giọng nói.' : 'Speech synthesis not supported.', 'warn');
+                return;
+            }
+            if (isSpeaking) {
+                stopAudioNarration();
+                return;
+            }
+
+            const item = monumentsData[currentMonumentId][currentLang];
+            const utterance = new SpeechSynthesisUtterance(`${item.title}. ${item.desc}`);
+            utterance.lang = currentLang === 'vi' ? 'vi-VN' : 'en-US';
+            utterance.rate = 0.96;
+
+            utterance.onstart = () => {
+                isSpeaking = true;
+                document.getElementById('audio-icon').className = "fa-solid fa-stop animate-pulse";
+                document.getElementById('audio-btn-text').textContent = i18n[currentLang].audio_stop;
+                document.getElementById('btn-audio-guide').classList.replace('bg-imperial', 'bg-jade');
+            };
+            utterance.onend = () => stopAudioNarration();
+            utterance.onerror = () => stopAudioNarration();
+
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function stopAudioNarration() {
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            isSpeaking = false;
+            document.getElementById('audio-icon').className = "fa-solid fa-volume-high";
+            document.getElementById('audio-btn-text').textContent = i18n[currentLang].audio_play;
+            document.getElementById('btn-audio-guide').classList.replace('bg-jade', 'bg-imperial');
+        }
+
+        // Web Audio API Synthesizer for Nha Nhac Instruments
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playTone(freq, type, duration, delay = 0, gainVal = 0.25) {
+            const ctx = getAudioContext();
+            const startTime = ctx.currentTime + delay;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, startTime);
+
+            gain.gain.setValueAtTime(0.001, startTime);
+            gain.gain.exponentialRampToValueAtTime(gainVal, startTime + 0.03);
+            gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start(startTime);
+            osc.stop(startTime + duration + 0.05);
+        }
+
+        function playInstrument(inst) {
+            // Vietnamese Hue Pentatonic Scale (Hò - Xự - Xang - Xê - Cống)
+            if (inst === 'tyba') {
+                const notes = [293.66, 349.23, 392.00, 440.00, 523.25]; // D4, F4, G4, A4, C5
+                notes.forEach((f, idx) => playTone(f, 'triangle', 0.55, idx * 0.16, 0.28));
+            } else if (inst === 'sao') {
+                const notes = [587.33, 523.25, 440.00, 392.00, 440.00];
+                notes.forEach((f, idx) => playTone(f, 'sine', 0.7, idx * 0.22, 0.25));
+            } else if (inst === 'trong') {
+                playTone(110, 'sine', 0.45, 0, 0.45);
+                playTone(95, 'sine', 0.45, 0.28, 0.45);
+                playTone(880, 'triangle', 0.6, 0.55, 0.16); // Thanh la bell accent
+            }
+        }
+
+        function playRoyalEnsemble() {
+            playInstrument('trong');
+            setTimeout(() => playInstrument('tyba'), 150);
+            setTimeout(() => playInstrument('sao'), 450);
+            showToast(currentLang === 'vi' ? 'Đang phát hòa tấu ngũ cung Nhã nhạc Huế...' : 'Playing Hue pentatonic royal ensemble phrase...');
+        }
+
+        // Interactive Itinerary & Dress-Code Generator
+        function generateItinerary() {
+            const days = document.getElementById('plan-duration').value;
+            const theme = document.getElementById('plan-theme').value;
+            const attire = document.getElementById('plan-attire').value;
+
+            const dressBox = document.getElementById('dresscode-feedback');
+            const outBox = document.getElementById('itinerary-output');
+
+            // 1. Evaluate Dress Code
+            if (attire === 'short') {
+                dressBox.className = "lg:col-span-4 p-6 rounded-2xl bg-amber-50 border-2 border-amber-500/50 text-amber-950 space-y-2";
+                dressBox.innerHTML = `
+                    <div class="flex items-center gap-2 font-bold text-amber-800 text-base">
+                        <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+                        <span>${currentLang === 'vi' ? 'Lưu ý Trang phục Tôn nghiêm' : 'Sacred Site Dress-Code Notice'}</span>
+                    </div>
+                    <p class="text-xs sm:text-sm leading-relaxed text-amber-900">
+                        ${currentLang === 'vi'
+                            ? 'Khi vào khu vực điện thờ trong Đại Nội (Điện Thái Hòa, Thế Miếu) và các Lăng vua, du khách cần mặc trang phục kín đáo, lịch sự (quần dài hoặc váy qua gối, áo có tay). Bạn nên chuẩn bị thêm khăn choàng hoặc áo khoác nhẹ.'
+                            : 'Inside sacred worship halls of the Imperial City (Thai Hoa Palace, The Mieu) and Royal Tombs, visitors must wear modest attire covering shoulders and knees. Please bring a shawl or overshirt.'}
+                    </p>
+                `;
+            } else {
+                dressBox.className = "lg:col-span-4 p-6 rounded-2xl bg-emerald-50 border-2 border-emerald-500/45 text-emerald-950 space-y-2";
+                dressBox.innerHTML = `
+                    <div class="flex items-center gap-2 font-bold text-emerald-800 text-base">
+                        <i class="fa-solid fa-circle-check text-xl"></i>
+                        <span>${currentLang === 'vi' ? 'Trang phục Hoàn hảo!' : 'Attire Approved!'}</span>
+                    </div>
+                    <p class="text-xs sm:text-sm leading-relaxed text-emerald-900">
+                        ${attire === 'aodai'
+                            ? (currentLang === 'vi'
+                                ? 'Áo dài truyền thống / Cổ phục Việt vô cùng tôn nghiêm và hài hòa với không gian kiến trúc cung đình Huế — đồng thời giúp bạn có những khung hình kỷ niệm tuyệt đẹp tại Ngọ Môn.'
+                                : 'Traditional Ao Dai or Vietnamese historical attire harmonizes beautifully with Hue’s royal architecture and meets all sacred dress-code standards.')
+                            : (currentLang === 'vi'
+                                ? 'Trang phục lịch sự, kín đáo của bạn hoàn toàn phù hợp để tham quan toàn bộ khu vực Đại Nội, điện thờ và các lăng tẩm.'
+                                : 'Your polite, modest attire is fully compliant for visiting all palaces, shrines, and royal tombs.')}
+                    </p>
+                `;
+            }
+
+            // 2. Build Tailored Schedule
+            const schedules = {
+                vi: {
+                    '1day_palace': [
+                        { time: "07:30 – 10:30", place: "Đại Nội Huế (Ngọ Môn – Điện Thái Hòa – Duyệt Thị Đường)", note: "Tham quan Hoàng Thành buổi sáng sớm và xem biểu diễn Nhã nhạc cung đình tại nhà hát Duyệt Thị Đường." },
+                        { time: "11:30 – 13:30", place: "Ẩm thực Cố đô & Trà sen Tịnh Tâm", note: "Thưởng thức Bún bò Huế, bánh bèo – nậm – lọc truyền thống." },
+                        { time: "14:30 – 17:00", place: "Lăng Khải Định (Ứng Lăng) & Chùa Thiên Mụ", note: "Chiêm ngưỡng nghệ thuật khảm sành sứ tinh xảo và đón hoàng hôn bên bờ sông Hương." }
+                    ],
+                    '1day_tombs': [
+                        { time: "08:00 – 10:00", place: "Lăng Minh Mạng (Hiếu Lăng)", note: "Khám phá bố cục 40 công trình đối xứng chuẩn mực giữa rừng thông ngã ba Bằng Lãng." },
+                        { time: "10:30 – 12:00", place: "Lăng Khải Định (Ứng Lăng)", note: "Tham quan kiệt tác giao thoa kiến trúc Á – Âu trên triền núi Châu Chữ." },
+                        { time: "14:30 – 17:00", place: "Lăng Tự Đức (Khiêm Lăng)", note: "Dạo bước bên hồ Lưu Khiêm đầy hoa sen và tìm hiểu cuộc đời vị hoàng đế thi sĩ." }
+                    ],
+                    '1day_spiritual': [
+                        { time: "08:00 – 10:00", place: "Chùa Thiên Mụ & Đồi Hà Khê", note: "Chiêm bái tháp Phước Duyên 7 tầng cổ kính và ngắm toàn cảnh dòng sông Hương." },
+                        { time: "10:30 – 13:30", place: "Làng hương Thủy Xuân & Ẩm thực chay Huế", note: "Trải nghiệm không gian sắc màu trầm hương và thưởng thức cơm chay thanh tịnh." },
+                        { time: "19:30 – 21:00", place: "Nghe Ca Huế trên thuyền rồng Sông Hương", note: "Ngắm cầu Trường Tiền rực rỡ ánh đèn và thả hoa đăng cầu bình an." }
+                    ],
+                    '2days_default': [
+                        { time: "Ngày 1 • Sáng", place: "Quần thể Đại Nội Huế & Bảo tàng Cổ vật Cung đình", note: "Khám phá trọn vẹn Hoàng Thành, Tử Cấm Thành và nghe thuyết minh lịch sử triều Nguyễn." },
+                        { time: "Ngày 1 • Chiều & Tối", place: "Chùa Thiên Mụ – Cầu Trường Tiền – Ca Huế Sông Hương", note: "Ngắm hoàng hôn trên đồi Hà Khê và thưởng thức nghệ thuật Ca Huế trên thuyền rồng." },
+                        { time: "Ngày 2 • Cả ngày", place: "Hành trình Di sản Lăng tẩm (Lăng Minh Mạng – Lăng Tự Đức – Lăng Khải Định)", note: "So sánh 3 phong cách kiến trúc lăng tẩm tiêu biểu nhất của các vị vua triều Nguyễn." }
+                    ]
+                },
+                en: {
+                    '1day_palace': [
+                        { time: "07:30 – 10:30", place: "Hue Imperial City (Ngo Mon – Thai Hoa Palace – Duyet Thi Duong)", note: "Explore the Citadel in the cool morning and attend a live Nha Nhac court music performance." },
+                        { time: "11:30 – 13:30", place: "Royal Cuisine & Lotus Tea Lunch", note: "Savor authentic Bun Bo Hue and delicate Hue steamed rice cakes." },
+                        { time: "14:30 – 17:00", place: "Khai Dinh Tomb & Thien Mu Pagoda", note: "Admire intricate porcelain mosaics before watching sunset by the Perfume River." }
+                    ],
+                    '1day_tombs': [
+                        { time: "08:00 – 10:00", place: "Tomb of Emperor Minh Mang", note: "Walk the 700m symmetrical sacred axis surrounded by pine forests and tranquil lakes." },
+                        { time: "10:30 – 12:00", place: "Tomb of Emperor Khai Dinh", note: "Explore East-West architectural fusion terraced up Chau Chu Mountain." },
+                        { time: "14:30 – 17:00", place: "Tomb of Emperor Tu Duc", note: "Stroll around lotus-filled Luu Khiem Lake and the Poet Emperor's water pavilions." }
+                    ],
+                    '1day_spiritual': [
+                        { time: "08:00 – 10:00", place: "Thien Mu Pagoda on Ha Khe Hill", note: "Visit the iconic 7-tier Phuoc Duyen Tower overlooking the Perfume River." },
+                        { time: "10:30 – 13:30", place: "Thuy Xuan Incense Village & Hue Vegetarian Feast", note: "Discover traditional incense crafting and refined Buddhist culinary artistry." },
+                        { time: "19:30 – 21:00", place: "Perfume River Dragon Boat & Ca Hue Music", note: "Cruise past illuminated Truong Tien Bridge with live traditional chamber singing." }
+                    ],
+                    '2days_default': [
+                        { time: "Day 1 • Morning", place: "Hue Imperial City & Museum of Royal Antiquities", note: "In-depth exploration of Ngo Mon Gate, Thai Hoa Palace, and the Forbidden Purple City." },
+                        { time: "Day 1 • Afternoon & Night", place: "Thien Mu Pagoda – Truong Tien Bridge – Ca Hue Cruise", note: "Enjoy river sunset views followed by a traditional dragon boat performance." },
+                        { time: "Day 2 • Full Day", place: "Royal Tombs Heritage Trail (Minh Mang – Tu Duc – Khai Dinh)", note: "Experience the distinct architectural philosophies of three Nguyen Dynasty emperors." }
+                    ]
+                }
+            };
+
+            const key = days === '2days' ? '2days_default' : `1day_${theme}`;
+            const items = schedules[currentLang][key];
+
+            outBox.innerHTML = `
+                <h4 class="font-serif text-xl font-bold text-imperial flex items-center gap-2">
+                    <i class="fa-solid fa-route"></i>
+                    <span>${currentLang === 'vi' ? 'Lộ Trình Tham Quan Gợi Ý' : 'Recommended Heritage Itinerary'}</span>
+                </h4>
+                <div class="space-y-3">
+                    ${items.map(step => `
+                        <div class="p-4 rounded-xl bg-white border border-gold/25 shadow-sm flex flex-col sm:flex-row sm:items-center gap-3">
+                            <span class="px-3 py-1 rounded-lg bg-jade/10 text-jade font-bold text-xs shrink-0 w-fit">${step.time}</span>
+                            <div>
+                                <div class="font-bold text-sm sm:text-base text-ink">${step.place}</div>
+                                <p class="text-xs sm:text-sm text-ink-muted mt-0.5">${step.note}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Guestbook Functions
+        function renderGuestbookPresets() {
+            const select = document.getElementById('gb-preset');
+            select.innerHTML = guestbookPresets[currentLang].map((p, i) => `
+                <option value="${i}">${p.label}</option>
+            `).join('');
+        }
+
+        function applyPresetMessage() {
+            const idx = document.getElementById('gb-preset').value;
+            const preset = guestbookPresets[currentLang][idx];
+            if (preset && preset.text) {
+                document.getElementById('gb-message').value = preset.text;
+            }
+        }
+
+        function submitGuestbook(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('gb-name');
+            const msgInput = document.getElementById('gb-message');
+            const nameVal = nameInput.value.trim();
+            const msgVal = msgInput.value.trim();
+            if (!nameVal || !msgVal) return;
+
+            guestbookEntries.unshift({
+                name: nameVal,
+                time: currentLang === 'vi' ? 'Vừa xong' : 'Just now',
+                msg: msgVal
+            });
+
+            nameInput.value = '';
+            msgInput.value = '';
+            document.getElementById('gb-preset').value = '0';
+
+            renderGuestbookList();
+            showToast(currentLang === 'vi' ? 'Cảm ơn bạn đã ghi lưu bút về Cố đô Huế!' : 'Thank you for signing the Hue guestbook!', 'success');
+        }
+
+        function renderGuestbookList() {
+            const list = document.getElementById('guestbook-list');
+            list.innerHTML = guestbookEntries.map(entry => `
+                <div class="p-4 rounded-2xl bg-parchment border border-gold/25 shadow-sm space-y-1.5">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-xs sm:text-sm text-imperial">${escapeHtml(entry.name)}</span>
+                        <span class="text-[11px] text-ink-muted font-medium">${escapeHtml(entry.time)}</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-ink italic leading-relaxed">“${escapeHtml(entry.msg)}”</p>
+                </div>
+            `).join('');
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // Initialize on Window Load
+        window.onload = function() {
+            initPanoramaDrag();
+            setLanguage('vi');
+        };
+    </script>
+</body>
+</html>
